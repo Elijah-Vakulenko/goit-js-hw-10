@@ -44,6 +44,22 @@ body {
   gap: 8px;
   width: 272px;
   height: 40px;
+  border: 1px solid #808080;
+  border-radius: 4px;
+  padding: 16px 8px;
+}
+
+#datetime-picker:active {
+  border: 1px solid #4e75ff;
+}
+
+#datetime-picker:hover {
+  border: 1px solid #2e2f42;
+}
+
+#datetime-picker:disabled {
+  border: 1px solid #808080;
+  background-color: #fafafa;
 }
 
 .start-btn {
@@ -57,12 +73,21 @@ body {
   padding: 8px 16px;
   width: 75px;
   height: 40px;
-  background: #cfcfcf;
+  background: #4e75ff;
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.04em;
+  color: #ffffff;
+}
+
+.start-btn:hover {
+  background: #6c8cff;
+}
+
+.disable {
   color: #989898;
+  background: #cfcfcf;
 }
 
 .timer {
@@ -100,4 +125,65 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: #2e2f42;
+}
+
+/* TASK 2 */
+.form-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+legend {
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+.input-field {
+  border: 1px solid #808080;
+  border-radius: 4px;
+  width: 360px;
+  height: 40px;
+}
+
+fieldset {
+  border: 1px solid #757575;
+  border-radius: 4px;
+  width: 360px;
+  height: 78px;
+  margin-top: 16px;
+}
+
+fieldset:not(:first-child) {
+  display: flex;
+  align-items: end;
+  justify-content: space-around;
+}
+
+.notification-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 360px;
+  height: 40px;
+  color: #ffffff;
+  background: #4e75ff;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  margin-top: 24px;
 }
