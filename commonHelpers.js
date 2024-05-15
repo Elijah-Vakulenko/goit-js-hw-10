@@ -1,0 +1,2 @@
+import"./assets/modulepreload-polyfill-3cfb730f.js";/* empty css                      */import"./assets/vendor-94c342ae.js";document.querySelector("#datetime-picker");document.querySelector("[data-start]");function t(o){const n=Math.floor(o/864e5),e=Math.floor(o%864e5/36e5),c=Math.floor(o%864e5%36e5/6e4),r=Math.floor(o%864e5%36e5%6e4/1e3);return{days:n,hours:e,minutes:c,seconds:r}}console.log(t(2e3));console.log(t(14e4));console.log(t(2414e4));
+//# sourceMappingURL=commonHelpers.js.map
