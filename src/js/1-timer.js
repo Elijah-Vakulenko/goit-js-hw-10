@@ -28,10 +28,15 @@ const input = flatpickr('#datetime-picker', {
 
       //п1дключення пов1домлення за допомогою б1бл1отеки iziToast з в1дпов1жними налаштуваннями.
       iziToast.error({
-        title: 'Alert',
+        title: 'Error',
         message: 'Please choose a date in the future',
         position: "topRight",
+        titleColor: 'white',
+        iconColor: '#ffffff',
+        messageColor: 'white',
         backgroundColor: '#EF4040',
+        progressBarColor: '#B51B1B',
+        layout: 2,
       });
       startBtn.disabled = true;
     } else {
