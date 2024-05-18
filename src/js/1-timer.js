@@ -10,7 +10,7 @@ let userSelectedDate = [0];
 
 //поле інпуту з календарем та форматом відображення дати
 
-const input = flatpickr("#datetime-picker", {
+const input = flatpickr('#datetime-picker', {
   // dateFormat: "Y-m-d H:i",
   // altInput: true,
   // altFormat: "F j, Y (h:i K)", //кастомне відображення дати
@@ -31,6 +31,7 @@ const input = flatpickr("#datetime-picker", {
         title: 'Alert',
         message: 'Please choose a date in the future',
         position: "topRight",
+        backgroundColor: '#EF4040',
       });
       startBtn.disabled = true;
     } else {
