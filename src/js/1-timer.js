@@ -13,7 +13,6 @@ function showIziToastAlert() {
         message: 'Please choose a date in the future',
         position: "topRight",
         titleColor: 'white',
-        iconColor: '#ffffff',
         messageColor: 'white',
         backgroundColor: '#EF4040',
         progressBarColor: '#B51B1B',
