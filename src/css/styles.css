@@ -62,7 +62,7 @@ body {
   background-color: #fafafa;
 }
 
-.start-btn {
+button[data-start] {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -81,11 +81,11 @@ body {
   color: #ffffff;
 }
 
-.start-btn:hover {
+button[data-start]:hover {
   background: #6c8cff;
 }
 
-.disable {
+button[data-start]:disabled {
   color: #989898;
   background: #cfcfcf;
 }
