@@ -26,8 +26,9 @@ const input = flatpickr("input#datetime-picker", {
      
     if (selectedDate < new Date()) {
       iziToast.error({
-        title: 'Error',
+        title: 'Alert',
         message: 'Please choose a date in the future',
+        position: "topRight",
       });
       startBtn.disabled = true;
     } else {
