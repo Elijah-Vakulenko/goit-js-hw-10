@@ -50,7 +50,7 @@ body {
   flex-direction: row;
 }
 
-#datetime-picker {
+/* #datetime-picker {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -74,7 +74,7 @@ body {
 #datetime-picker:disabled {
   border: 1px solid #808080;
   background-color: #fafafa;
-}
+} */
 
 button[data-start] {
   display: flex;

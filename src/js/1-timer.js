@@ -10,10 +10,10 @@ let userSelectedDate = [0];
 
 //поле інпуту з календарем та форматом відображення дати
 
-const input = flatpickr("input#datetime-picker", {
-  dateFormat: "Y-m-d H:i",
-  altInput: true,
-  altFormat: "F j, Y (h:i K)", //кастомне відображення дати
+const input = flatpickr("#datetime-picker", {
+  // dateFormat: "Y-m-d H:i",
+  // altInput: true,
+  // altFormat: "F j, Y (h:i K)", //кастомне відображення дати
   enableTime: true, //підключення до календаря вибору годин і хвилин
   time_24hr: true,
   defaultDate: new Date(),
@@ -25,6 +25,8 @@ const input = flatpickr("input#datetime-picker", {
     const selectedDate = selectedDates[0];
      
     if (selectedDate < new Date()) {
+
+      //п1дключення пов1домлення за допомогою б1бл1отеки iziToast з в1дпов1жними налаштуваннями.
       iziToast.error({
         title: 'Alert',
         message: 'Please choose a date in the future',
