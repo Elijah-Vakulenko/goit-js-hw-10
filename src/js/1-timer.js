@@ -1,27 +1,29 @@
+// підключення бібліотеки
+
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
-
 let userSelectedDate = [0];
 
-const startBtn = document.querySelector("button[data-start]");
+//поле інпуту з календарем та форматом відображення дати
 
-
-const options = {
+const input = flatpickr("input#datetime-picker", {
   dateFormat: "Y-m-d H:i",
   altInput: true,
-  altFormat: "F j, Y (h:i K)",
-  enableTime: true,
+  altFormat: "F j, Y (h:i K)", //кастомне відображення дати
+  enableTime: true, //підключення до календаря вибору годин і хвилин
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
+
+  //що відбувається при закритті календарика
   onClose(selectedDates) {
     
     const selectedDate = selectedDates[0];
-    
+     
     if (selectedDate < new Date()) {
       iziToast.error({
         title: 'Error',
@@ -33,11 +35,26 @@ const options = {
       startBtn.disabled = false; 
     }
   },
-}
+});
+ 
 
-const input = flatpickr("input#datetime-picker", options);
+
+const startBtn = document.querySelector("button[data-start]");
+
 class Timer {
-   start(selectedDate) {
+
+  constructor(){
+    this.isActive = false;
+  }
+
+
+
+  start(selectedDate) {
+    if (this.isActive) {
+       return
+     }
+
+    this.isActive = true;
     const intervalId = setInterval(() => {
       const currentTime = new Date();
       const ms = selectedDate - currentTime;
