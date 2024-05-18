@@ -1,4 +1,4 @@
-// підключення бібліотеки
+// підключення бібліотеки:
 
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
@@ -6,27 +6,8 @@ import "flatpickr/dist/flatpickr.min.css";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
-let userSelectedDate = [0];
-
-//поле інпуту з календарем та форматом відображення дати
-
-const input = flatpickr('#datetime-picker', {
-  // dateFormat: "Y-m-d H:i",
-  // altInput: true,
-  // altFormat: "F j, Y (h:i K)", //кастомне відображення дати
-  enableTime: true, //підключення до календаря вибору годин і хвилин
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-
-  //що відбувається при закритті календарика
-  onClose(selectedDates) {
-    
-    const selectedDate = selectedDates[0];
-     
-    if (selectedDate < new Date()) {
-
-      //п1дключення пов1домлення за допомогою б1бл1отеки iziToast з в1дпов1жними налаштуваннями.
+//Функція підключення повідомлення за допомогою бібліотеки iziToast з відповідними налаштуваннями:
+function showIziToastAlert() {
       iziToast.error({
         title: 'Error',
         message: 'Please choose a date in the future',
@@ -36,59 +17,73 @@ const input = flatpickr('#datetime-picker', {
         messageColor: 'white',
         backgroundColor: '#EF4040',
         progressBarColor: '#B51B1B',
-        layout: 2,
-      });
-      startBtn.disabled = true;
-    } else {
-      userSelectedDate = selectedDate; 
-      startBtn.disabled = false; 
-    }
-  },
-});
- 
+        class: 'iziToast-settings', //додаткову стилізацію запхнув сюди до класу в CSS
+      });}
 
+let userSelectedDate = [0];
 
-const startBtn = document.querySelector("button[data-start]");
+const startBtn = document.querySelector("button[data-start]"); // ← дістаємо кнопку
 
-class Timer {
-
-  constructor(){
-    this.isActive = false;
-  }
-
-
-
-  start(selectedDate) {
-    if (this.isActive) {
-       return
-     }
-
-    this.isActive = true;
-    const intervalId = setInterval(() => {
-      const currentTime = new Date();
-      const ms = selectedDate - currentTime;
-      const { days, hours, minutes, seconds } = convertMs(ms);
-      updateTimer(days, hours, minutes, seconds);
-      
-    
-      if (ms <= 0) {
-        clearInterval(intervalId);
-      }
-    }, 1000);
-  }
-}
-
-
-const timer = new Timer();
-
-const timerFields = {
+// Дістаємо елементи нашого таймера за прописаному в розмітці атрибутами↓
+const clockFace = {
   days: document.querySelector("[data-days]"),
   hours: document.querySelector("[data-hours]"),
   minutes: document.querySelector("[data-minutes]"),
   seconds: document.querySelector("[data-seconds]"),
 };
 
+startBtn.disabled = true;
 
+//поле інпуту з календарем та форматом відображення дати:
+
+const input = flatpickr('#datetime-picker', {
+  enableTime: true, //← підключення до календаря вибору годин і хвилин
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) { //← що відбувається при закритті календарика↓
+    
+    const selectedDate = selectedDates[0];
+ 
+    if (selectedDate < new Date()) { //якщо обрана дата меньша за поточну, тобто в минулому, тоді↓
+
+     showIziToastAlert(); // ← Викликаємо алерт iziToast
+     startBtn.disabled = true; // ← вимикаємо кнопку бо обрана дата в минулому
+    
+    } else {
+      userSelectedDate = selectedDate; 
+      startBtn.disabled = false; // ← якщо дата в майбутньому вмикаємо кнопку
+    }
+  },
+});
+
+class Timer {
+
+  start(selectedDate) {
+    startBtn.disabled = true; // ← Вимикаємо кнопку поки йде відлік
+    input.element.disabled = true; // ← Вимикаємо поле вибору дати
+
+    //Робимо інтервал зворотнього відліку в 1 сек (1000 мс):
+    const countDownInterval = setInterval(() => {
+      const currentTime = new Date(); // ← визначаємо поточний час
+      const ms = selectedDate - currentTime; // загальний час в мілесекундах дорівнює різниці обраного часу від поточного
+      const { days, hours, minutes, seconds } = convertMs(ms);
+      updateTimer(days, hours, minutes, seconds);
+      
+    // Якщо час відліку вже сплив:
+      if (ms <= 0) {
+        clearInterval(countDownInterval); //очищуємо інтервал
+        updateTimer(0, 0, 0, 0); // Обнуляємо лічильник
+        startBtn.disabled = false; // Вмикаємо кнопку для можливості повторного використання
+        input.element.disabled = false; // Вмикаємо інпут для обирання нової дати
+      }
+    }, 1000); // крок через який буде повторюватись функція інтервалу
+  }
+}
+
+const timer = new Timer();
+
+// Конвертор загального часу в мілесекундах у значення таймеру:
 function convertMs(ms) {
   const second = 1000;
   const minute = second * 60;
@@ -103,17 +98,18 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
+// Функція оновлює значення таймеру, форматуючи функцією addLeadingZero:
 function updateTimer(days, hours, minutes, seconds) {
-  timerFields.days.textContent = addLeadingZero(days);
-  timerFields.hours.textContent = addLeadingZero(hours);
-  timerFields.minutes.textContent = addLeadingZero(minutes);
-  timerFields.seconds.textContent = addLeadingZero(seconds);
+  clockFace.days.textContent = addLeadingZero(days);
+  clockFace.hours.textContent = addLeadingZero(hours);
+  clockFace.minutes.textContent = addLeadingZero(minutes);
+  clockFace.seconds.textContent = addLeadingZero(seconds);
 }
 
+// Функція форматує час за шаблоном 00:00:00:00: 
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
 
-startBtn.addEventListener('click', () => timer.start(userSelectedDate)); 
-
-
+//на кнопці слухач подій який викликає функцію: 
+startBtn.addEventListener('click', () => timer.start(userSelectedDate));

@@ -29,18 +29,18 @@ body {
 
 .navBtn {
   display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 16px;
-    height: 40px;
-    width: 135px;
-    background: #4e75ff;
-    color: #fff;
-    margin-bottom: 24px;
-  }
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  height: 40px;
+  width: 135px;
+  background: #4e75ff;
+  color: #fff;
+  margin-bottom: 24px;
+}
 
 .calendar-block {
   display: flex;
@@ -76,10 +76,10 @@ body {
   background-color: #fafafa;
 }
 
-.iziToast-layout3{
-width: 600px;
-height: 64px;
-color: white;
+body .iziToast-settings {
+  width: 500px;
+  height: 64px;
+  font-size: 16px;
 }
 
 button[data-start] {
