@@ -27,6 +27,21 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
+.navBtn {
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    height: 40px;
+    width: 135px;
+    background: #4e75ff;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+
 .calendar-block {
   display: flex;
   gap: 8px;
