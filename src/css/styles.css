@@ -63,7 +63,8 @@ body {
   padding: 16px 8px;
 }
 
-#datetime-picker:active {
+#datetime-picker:active,
+#datetime-picker:focus {
   border: 1px solid #4e75ff;
 }
 
@@ -172,6 +173,14 @@ legend {
   border-radius: 4px;
   width: 360px;
   height: 40px;
+}
+
+.input-field:hover {
+  border: 1px solid #000000;
+}
+
+.input-field:focus {
+  border: 1px solid #4e75ff;
 }
 
 fieldset {

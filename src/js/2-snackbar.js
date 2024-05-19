@@ -6,6 +6,15 @@ import "izitoast/dist/css/iziToast.min.css";
 // Імпортую форму на яку буде виконуватися сабміт:
 const form = document.querySelector('.form');
 
+const notificationBtn = document.querySelector('button');
+notificationBtn.className = 'notification-btn'; // Додаю клас ддля стилізації
+
+const label = document.querySelector('.form label');
+label.className = 'form-label';
+
+const input = document.querySelector('.form input[name="delay"]');
+input.className = 'input-field';
+
 
 //Далі створюю функції з алертами залежно від потреби
 function showIziToastFulfilledAlert(delay) {

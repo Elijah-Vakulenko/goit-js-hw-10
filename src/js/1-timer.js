@@ -6,6 +6,7 @@ import "flatpickr/dist/flatpickr.min.css";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
+
 //Функція підключення повідомлення за допомогою бібліотеки iziToast з відповідними налаштуваннями:
 function showIziToastAlert() {
       iziToast.error({
@@ -21,7 +22,15 @@ function showIziToastAlert() {
 
 let userSelectedDate = [0];
 
+const calendarBlock = document.createElement('div'); // ← Створюю контейнер для стилізації інтерфейсу
+calendarBlock.className = 'calendar-block'; // Додаю клас до контейнера
+document.body.prepend(calendarBlock);
+
+const input = document.querySelector('#datetime-picker');
+calendarBlock.appendChild(input); // Додаю інпут в контейнер
+
 const startBtn = document.querySelector("button[data-start]"); // ← дістаємо кнопку
+calendarBlock.appendChild(startBtn); // Додаю кнопку до контейнеру
 
 // Дістаємо елементи нашого таймера за прописаному в розмітці атрибутами↓
 const clockFace = {
@@ -33,9 +42,9 @@ const clockFace = {
 
 startBtn.disabled = true;
 
-//поле інпуту з календарем та форматом відображення дати:
 
-const input = flatpickr('#datetime-picker', {
+//поле інпуту з календарем та форматом відображення дати:
+ const datePicker = flatpickr(input, {
   enableTime: true, //← підключення до календаря вибору годин і хвилин
   time_24hr: true,
   defaultDate: new Date(),
@@ -60,7 +69,7 @@ class Timer {
 
   start(selectedDate) {
     startBtn.disabled = true; // ← Вимикаємо кнопку поки йде відлік
-    input.element.disabled = true; // ← Вимикаємо поле вибору дати
+    input.disabled = true; // ← Вимикаємо поле вибору дати
 
     //Робимо інтервал зворотнього відліку в 1 сек (1000 мс):
     const countDownInterval = setInterval(() => {
@@ -74,7 +83,7 @@ class Timer {
         clearInterval(countDownInterval); //очищуємо інтервал
         updateTimer(0, 0, 0, 0); // Обнуляємо лічильник
         startBtn.disabled = false; // Вмикаємо кнопку для можливості повторного використання
-        input.element.disabled = false; // Вмикаємо інпут для обирання нової дати
+        input.disabled = false; // Вмикаємо інпут для обирання нової дати
       }
     }, 1000); // крок через який буде повторюватись функція інтервалу
   }
